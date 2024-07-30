@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tbnotice.mapper.TbnoticeMapper">
+    <select id="detail" parameterType="hashMap" resultType="com.example.tbnotice.dto.CommonDto$TbnoticeDetailResDto">
+        SELECT tbnotice.id
+            ,tbnotice.title
+            ,tbnotice.cate
+            ,tbnotice.content
+        FROM tbnotice
+        WHERE tbnotice.id = #{id}
+    </select>
+    <select id="list" parameterType="hashMap" resultType="com.example.tbnotice.dto.CommonDto$TbnoticeDetailResDto">
+        SELECT tbnotice.id
+            ,tbnotice.title
+            ,tbnotice.cate
+            ,tbnotice.content
+        FROM tbnotice
+        WHERE tbnotice.id is not NULL
+        <if test = "title != null and title != ''">AND tbnotice.title LIKE CONCAT('%', #{title}, '%')</if>
+        ORDER BY tbnotice.title ASC
+    </select>
+</mapper>
